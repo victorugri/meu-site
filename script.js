@@ -4,48 +4,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- TRANSLATION LOGIC ---
     const translations = {
-        // --- YOU NEED TO FILL THESE IN! ---
-        // Example structure:
-        // "key_name": {
-        //     "en": "English Text",
-        //     "pt": "Texto em Português",
-        //     "de": "Text auf Deutsch",
-        //     "fr": "Texte en Français",
-        //     "es": "Texto en Español"
-        // },
-        "page_title": {
-            "en": "Victor Ugrinovich - Fullstack Developer",
-            "pt": "Victor Ugrinovich - Desenvolvedor Fullstack",
-            "de": "Victor Ugrinovich - Fullstack-Entwickler",
-            "fr": "Victor Ugrinovich - Développeur Fullstack",
-            "es": "Victor Ugrinovich - Desarrollador Fullstack"
-        },
-        "header_name": { /* Name might not need translation */
-            "en": "Victor Ugrinovich", "pt": "Victor Ugrinovich", "de": "Victor Ugrinovich", "fr": "Victor Ugrinovich", "es": "Victor Ugrinovich"
-        },
-        "header_role": {
-            "en": "Fullstack Developer", "pt": "Desenvolvedor Fullstack", "de": "Fullstack-Entwickler", "fr": "Développeur Fullstack", "es": "Desarrollador Fullstack"
-        },
-        "header_location": {
-            "en": "Location: Brazil / Eligible for EU (Austrian Citizenship - No work visa required)",
-            "pt": "Localização: Brasil / Elegível para UE (Cidadania Austríaca - Visto de trabalho não necessário)",
-            "de": "Standort: Brasilien / EU-berechtigt (Österreichische Staatsbürgerschaft - Kein Arbeitsvisum erforderlich)",
-            "fr": "Lieu: Brésil / Éligible pour l'UE (Citoyenneté autrichienne - Aucun visa de travail requis)",
-            "es": "Ubicación: Brasil / Elegible para UE (Ciudadanía austríaca - No se requiere visa de trabajo)"
-        },
+        "page_title": { "en": "Victor Ugrinovich - Fullstack Developer", "pt": "Victor Ugrinovich - Desenvolvedor Fullstack", "de": "Victor Ugrinovich - Fullstack-Entwickler", "fr": "Victor Ugrinovich - Développeur Fullstack", "es": "Victor Ugrinovich - Desarrollador Fullstack" },
+        "header_name": { "en": "Victor Ugrinovich", "pt": "Victor Ugrinovich", "de": "Victor Ugrinovich", "fr": "Victor Ugrinovich", "es": "Victor Ugrinovich" },
+        "header_role": { "en": "Fullstack Developer", "pt": "Desenvolvedor Fullstack", "de": "Fullstack-Entwickler", "fr": "Développeur Fullstack", "es": "Desarrollador Fullstack" },
+        "header_location": { "en": "Location: Brazil / Eligible for EU (Austrian Citizenship - No work visa required)", "pt": "Localização: Brasil / Elegível para UE (Cidadania Austríaca - Visto de trabalho não necessário)", "de": "Standort: Brasilien / EU-berechtigt (Österreichische Staatsbürgerschaft - Kein Arbeitsvisum erforderlich)", "fr": "Lieu: Brésil / Éligible pour l'UE (Citoyenneté autrichienne - Aucun visa de travail requis)", "es": "Ubicación: Brasil / Elegible para UE (Ciudadanía austríaca - No se requiere visa de trabajo)" },
         "nav_about": {"en": "About", "pt": "Sobre", "de": "Über", "fr": "À propos", "es": "Acerca de"},
         "nav_skills": {"en": "Skills", "pt": "Habilidades", "de": "Fähigkeiten", "fr": "Compétences", "es": "Habilidades"},
         "nav_experience": {"en": "Experience", "pt": "Experiência", "de": "Erfahrung", "fr": "Expérience", "es": "Experiencia"},
         "nav_education": {"en": "Education", "pt": "Educação", "de": "Bildung", "fr": "Éducation", "es": "Educación"},
         "nav_languages": {"en": "Languages", "pt": "Idiomas", "de": "Sprachen", "fr": "Langues", "es": "Idiomas"},
         "about_title": {"en": "About Me", "pt": "Sobre Mim", "de": "Über mich", "fr": "À propos de moi", "es": "Sobre mí"},
-        "about_text": {
-            "en": "Dynamic and results-oriented Fullstack Developer with a strong foundation in .NET technologies, modern frontend frameworks, and cloud services. Proven ability to contribute to all phases of the software development lifecycle, from concept and design to deployment and maintenance. Passionate about building scalable, efficient, and user-friendly applications. Eager to leverage diverse technical skills and a proactive approach to problem-solving in challenging projects.",
-            "pt": "Desenvolvedor Fullstack dinâmico e orientado a resultados, com forte base em tecnologias .NET, frameworks frontend modernos e serviços em nuvem. Capacidade comprovada de contribuir em todas as fases do ciclo de vida de desenvolvimento de software, desde o conceito e design até a implantação e manutenção. Apaixonado por construir aplicações escaláveis, eficientes e fáceis de usar. Ansioso para alavancar diversas habilidades técnicas e uma abordagem proativa para resolver problemas em projetos desafiadores.",
-            "de": "Dynamischer und ergebnisorientierter Fullstack-Entwickler mit fundierten Kenntnissen in .NET-Technologien, modernen Frontend-Frameworks und Cloud-Diensten. Nachgewiesene Fähigkeit, in allen Phasen des Softwareentwicklungszyklus mitzuwirken, von Konzept und Design bis hin zu Bereitstellung und Wartung. Leidenschaft für die Entwicklung skalierbarer, effizienter und benutzerfreundlicher Anwendungen. Bestrebt, vielfältige technische Fähigkeiten und einen proaktiven Ansatz zur Problemlösung in anspruchsvollen Projekten einzusetzen.",
-            "fr": "Développeur Fullstack dynamique et axé sur les résultats, avec une solide base en technologies .NET, frameworks frontend modernes et services cloud. Capacité avérée à contribuer à toutes les phases du cycle de vie du développement logiciel, de la conception à la maintenance, en passant par le déploiement. Passionné par la création d'applications évolutives, efficaces et conviviales. Désireux de mettre à profit des compétences techniques diverses et une approche proactive de la résolution de problèmes dans des projets stimulants.",
-            "es": "Desarrollador Fullstack dinámico y orientado a resultados con una sólida base en tecnologías .NET, frameworks frontend modernos y servicios en la nube. Capacidad demostrada para contribuir en todas las fases del ciclo de vida del desarrollo de software, desde el concepto y diseño hasta la implementación y el mantenimiento. Apasionado por construir aplicaciones escalables, eficientes y fáciles de usar. Deseoso de aprovechar diversas habilidades técnicas y un enfoque proactivo para la resolución de problemas en proyectos desafiantes."
-        },
+        "about_text": { "en": "Dynamic and results-oriented Fullstack Developer with a strong foundation in .NET technologies, modern frontend frameworks, and cloud services. Proven ability to contribute to all phases of the software development lifecycle, from concept and design to deployment and maintenance. Passionate about building scalable, efficient, and user-friendly applications. Eager to leverage diverse technical skills and a proactive approach to problem-solving in challenging projects.", "pt": "Desenvolvedor Fullstack dinâmico e orientado a resultados, com forte base em tecnologias .NET, frameworks frontend modernos e serviços em nuvem. Capacidade comprovada de contribuir em todas as fases do ciclo de vida de desenvolvimento de software, desde o conceito e design até a implantação e manutenção. Apaixonado por construir aplicações escaláveis, eficientes e fáceis de usar. Ansioso para alavancar diversas habilidades técnicas e uma abordagem proativa para resolver problemas em projetos desafiadores.", "de": "Dynamischer und ergebnisorientierter Fullstack-Entwickler mit fundierten Kenntnissen in .NET-Technologien, modernen Frontend-Frameworks und Cloud-Diensten. Nachgewiesene Fähigkeit, in allen Phasen des Softwareentwicklungszyklus mitzuwirken, von Konzept und Design bis hin zu Bereitstellung und Wartung. Leidenschaft für die Entwicklung skalierbarer, effizienter und benutzerfreundlicher Anwendungen. Bestrebt, vielfältige technische Fähigkeiten und einen proaktiven Ansatz zur Problemlösung in anspruchsvollen Projekten einzusetzen.", "fr": "Développeur Fullstack dynamique et axé sur les résultats, avec une solide base en technologies .NET, frameworks frontend modernes et services cloud. Capacité avérée à contribuer à toutes les phases du cycle de vie du développement logiciel, de la conception à la maintenance, en passant par le déploiement. Passionné par la création d'applications évolutives, efficaces et conviviales. Désireux de mettre à profit des compétences techniques diverses et une approche proactive de la résolution de problèmes dans des projets stimulants.", "es": "Desarrollador Fullstack dinámico y orientado a resultados con una sólida base en tecnologías .NET, frameworks frontend modernos y servicios en la nube. Capacidad demostrada para contribuir en todas las fases del ciclo de vida del desarrollo de software, desde el concepto y diseño hasta la implementación y el mantenimiento. Apasionado por construir aplicaciones escalables, eficientes y fáciles de usar. Deseoso de aprovechar diversas habilidades técnicas y un enfoque proactivo para la resolución de problemas en proyectos desafiantes." },
         "skills_title": {"en": "Skills", "pt": "Habilidades", "de": "Fähigkeiten", "fr": "Compétences", "es": "Habilidades"},
         "skills_backend_title": {"en": "Backend Development", "pt": "Desenvolvimento Backend", "de": "Backend-Entwicklung", "fr": "Développement Backend", "es": "Desarrollo Backend"},
         "skills_frontend_title": {"en": "Frontend Development", "pt": "Desenvolvimento Frontend", "de": "Frontend-Entwicklung", "fr": "Développement Frontend", "es": "Desarrollo Frontend"},
@@ -56,13 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         "skills_selfmanage": {"en": "Self-management", "pt": "Autogestão", "de": "Selbstmanagement", "fr": "Autogestion", "es": "Autogestión"},
         "skills_autonomy": {"en": "Autonomy", "pt": "Autonomia", "de": "Autonomie", "fr": "Autonomie", "es": "Autonomía"},
         "experience_title": {"en": "Experience", "pt": "Experiência", "de": "Erfahrung", "fr": "Expérience", "es": "Experiencia"},
-        "experience_tech_stack_note": {
-            "en": "Technologies: .NET, C#, HTML, JavaScript, SQL Server",
-            "pt": "Tecnologias: .NET, C#, HTML, JavaScript, SQL Server",
-            "de": "Technologien: .NET, C#, HTML, JavaScript, SQL Server",
-            "fr": "Technologies: .NET, C#, HTML, JavaScript, SQL Server",
-            "es": "Tecnologías: .NET, C#, HTML, JavaScript, SQL Server"
-        },
+        "experience_tech_stack_note": { "en": "Technologies: .NET, C#, HTML, JavaScript, SQL Server", "pt": "Tecnologias: .NET, C#, HTML, JavaScript, SQL Server", "de": "Technologien: .NET, C#, HTML, JavaScript, SQL Server", "fr": "Technologies: .NET, C#, HTML, JavaScript, SQL Server", "es": "Tecnologías: .NET, C#, HTML, JavaScript, SQL Server" },
         "experience_role_midlevel": {"en": "Mid-Level Fullstack Developer", "pt": "Desenvolvedor Fullstack Pleno", "de": "Mid-Level Fullstack-Entwickler", "fr": "Développeur Fullstack Mid-Level", "es": "Desarrollador Fullstack de Nivel Medio"},
         "experience_date_midlevel_present": {"en": "Jan 2023 - Today", "pt": "Jan 2023 - Hoje", "de": "Jan 2023 - Heute", "fr": "Janv 2023 - Aujourd'hui", "es": "Ene 2023 - Actualidad"},
         "experience_role_junior": {"en": "Junior Fullstack Developer", "pt": "Desenvolvedor Fullstack Júnior", "de": "Junior Fullstack-Entwickler", "fr": "Développeur Fullstack Junior", "es": "Desarrollador Fullstack Junior"},
@@ -98,131 +61,177 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const languageSwitcher = document.getElementById('language-switcher');
     const langButtons = document.querySelectorAll('.lang-btn');
-    let currentLang = localStorage.getItem('preferredLang') || 'en'; // Default to English
+    let currentLang = localStorage.getItem('preferredLang') || 'en'; 
 
     function setLanguage(lang) {
         currentLang = lang;
         localStorage.setItem('preferredLang', lang);
-        document.documentElement.lang = lang; // Set lang attribute on HTML element
+        document.documentElement.lang = lang; 
 
         document.querySelectorAll('[data-translate-key]').forEach(element => {
             const key = element.getAttribute('data-translate-key');
             if (translations[key] && translations[key][lang]) {
                 element.textContent = translations[key][lang];
             } else if (translations[key] && translations[key]['en']) {
-                // Fallback to English if translation for current lang is missing
                 element.textContent = translations[key]['en'];
             } else {
                 console.warn(`Translation key "${key}" or its "${lang}" translation not found.`);
             }
         });
 
-        // Update active button
         langButtons.forEach(btn => {
             btn.classList.toggle('active', btn.dataset.lang === lang);
         });
     }
 
-    languageSwitcher.addEventListener('click', (event) => {
-        if (event.target.matches('.lang-btn')) {
-            const lang = event.target.dataset.lang;
-            if (lang) {
-                setLanguage(lang);
+    if (languageSwitcher) {
+        languageSwitcher.addEventListener('click', (event) => {
+            if (event.target.matches('.lang-btn')) {
+                const lang = event.target.dataset.lang;
+                if (lang) {
+                    setLanguage(lang);
+                }
             }
-        }
-    });
-
-    // Apply initial language
+        });
+    }
+    
     setLanguage(currentLang);
 
+    // --- Active Nav Link on Scroll/Click (Optional Enhancement) ---
+    const navLinks = document.querySelectorAll('#navbar a');
+    const sections = document.querySelectorAll('main section');
 
-    // --- Sticky Navbar (basic version) ---
-    const navbar = document.getElementById('navbar');
-    // Ensure navbar exists before trying to get its offsetTop
-    const sticky = navbar ? navbar.offsetTop : 0; 
-
-    window.onscroll = function() {
-        if (navbar && window.pageYOffset >= sticky) {
-            navbar.classList.add("sticky-nav"); 
-        } else if (navbar) {
-            navbar.classList.remove("sticky-nav");
+    function changeNavOnScroll() {
+        let index = sections.length;
+        while(--index && window.scrollY + 100 < sections[index].offsetTop) {} // 100 is an offset
+        
+        navLinks.forEach((link) => link.classList.remove('active-link'));
+        if (navLinks[index]) { // Check if navLinks[index] exists
+            navLinks[index].classList.add('active-link');
         }
-    };
-    
+    }
+    // Call on load and on scroll
+    changeNavOnScroll();
+    window.addEventListener('scroll', changeNavOnScroll);
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            navLinks.forEach(l => l.classList.remove('active-link'));
+            this.classList.add('active-link');
+        });
+    });
+
+
     // --- THREE.JS SCENE ---
     const canvas = document.getElementById('bg-canvas');
     if (!canvas) {
         console.error("Canvas element not found for Three.js");
-        // return; // Don't return, allow other JS to run
     }
 
     let scene, camera, renderer, shapes = [];
+    const mouse = new THREE.Vector2(); // For mouse interaction
 
     function initThree() {
-        if (!canvas) return; // Don't initialize if canvas is not there
+        if (!canvas) return;
 
         scene = new THREE.Scene();
         
         camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.z = 5;
+        camera.position.z = 6; // Adjusted camera position
 
-        renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
+        renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setClearColor(0x000000, 0); 
 
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5); 
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0x406080, 0.8); // Softer, bluish ambient light
         scene.add(ambientLight);
-        const pointLight = new THREE.PointLight(0x00aeff, 1, 100); 
-        pointLight.position.set(5, 5, 5);
+        
+        const primaryColorCSS = getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim() || '#00bfff';
+        const pointLight = new THREE.PointLight(new THREE.Color(primaryColorCSS), 1.2, 150, 1.5); // color, intensity, distance, decay
+        pointLight.position.set(3, 4, 7); // Adjusted position
         scene.add(pointLight);
 
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.4); // Softer directional light
+        directionalLight.position.set(-5, -3, 4);
+        scene.add(directionalLight);
+
+
         const geometries = [
-            new THREE.TorusKnotGeometry(0.8, 0.25, 100, 16), 
-            new THREE.SphereGeometry(0.3, 32, 32),
-            new THREE.BoxGeometry(0.5, 0.5, 0.5),
-            new THREE.OctahedronGeometry(0.4),
+            new THREE.TorusKnotGeometry(0.7, 0.2, 120, 16), 
+            new THREE.SphereGeometry(0.35, 32, 32),
+            new THREE.BoxGeometry(0.6, 0.6, 0.6),
+            new THREE.OctahedronGeometry(0.45),
+            new THREE.TorusGeometry(0.5, 0.15, 16, 100)
+        ];
+        
+        const primaryColorTHREE = new THREE.Color(primaryColorCSS);
+        const accentColorTHREE1 = new THREE.Color(0xcccccc); // Light grey/silver
+        const accentColorTHREE2 = new THREE.Color(0xffffff); // White
+
+        const materials = [
+            new THREE.MeshStandardMaterial({ color: primaryColorTHREE, metalness: 0.7, roughness: 0.25, transparent: true, opacity: 0.75 }),
+            new THREE.MeshStandardMaterial({ color: accentColorTHREE1, metalness: 0.85, roughness: 0.15, transparent: true, opacity: 0.8 }),
+            new THREE.MeshStandardMaterial({ color: primaryColorTHREE.clone().offsetHSL(0, 0.05, 0.05), metalness: 0.6, roughness: 0.3, transparent: true, opacity: 0.7 }),
+            new THREE.MeshStandardMaterial({ color: accentColorTHREE2, metalness: 0.3, roughness: 0.6, transparent: true, opacity: 0.65 })
         ];
 
-        const material = new THREE.MeshStandardMaterial({ 
-            color: 0x0077ff, 
-            metalness: 0.6,
-            roughness: 0.3,
-            transparent: true,
-            opacity: 0.6 
-        });
+        const numShapes = 25; // Increased number of shapes
 
-        geometries.forEach((geom, index) => {
-            const shape = new THREE.Mesh(geom, material);
-            shape.position.x = (Math.random() - 0.5) * 8;
-            shape.position.y = (Math.random() - 0.5) * 6;
-            shape.position.z = (Math.random() - 0.5) * 2 -1; 
+        for (let i = 0; i < numShapes; i++) {
+            const geom = geometries[Math.floor(Math.random() * geometries.length)];
+            const materialForShape = materials[i % materials.length];
+            const shape = new THREE.Mesh(geom, materialForShape);
+            
+            shape.position.x = (Math.random() - 0.5) * 12; // Wider spread
+            shape.position.y = (Math.random() - 0.5) * 10;
+            shape.position.z = (Math.random() - 0.5) * 10 - 2; // Spread in depth, mostly in front
             
             shape.rotation.x = Math.random() * 2 * Math.PI;
             shape.rotation.y = Math.random() * 2 * Math.PI;
             
+            // Store original Z for parallax effect (optional, not used here yet but good for future)
+            // shape.originalZ = shape.position.z;
+
             shapes.push(shape);
             scene.add(shape);
-        });
-
+        }
+        
+        document.addEventListener('mousemove', onDocumentMouseMove, false);
         animate();
     }
 
+    function onDocumentMouseMove(event) {
+        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    }
+
     function animate() {
-        if (!renderer) return; // Don't animate if renderer not initialized
+        if (!renderer) return;
         requestAnimationFrame(animate);
 
+        const time = Date.now() * 0.00005; // Slower base time for animations
+
         shapes.forEach((shape, index) => {
-            shape.rotation.x += 0.002 + (index * 0.0005);
-            shape.rotation.y += 0.003 + (index * 0.0005);
-            shape.rotation.z += 0.001 + (index * 0.0005);
-            shape.position.y += Math.sin(Date.now() * 0.0005 + index) * 0.002;
+            shape.rotation.x += (0.0005 + (index % 5) * 0.00008); // Slower, varied rotation
+            shape.rotation.y += (0.0008 + (index % 5) * 0.00008);
+            shape.rotation.z += (0.0003 + (index % 5) * 0.00005);
+            
+            // Smoother, larger period oscillation
+            shape.position.y += Math.sin(time * 50 + index * 0.5) * 0.0018;
+            shape.position.x += Math.cos(time * 30 + index * 0.3) * 0.0012;
         });
+        
+        // Smooth camera movement towards mouse position for parallax
+        camera.position.x += (mouse.x * 0.8 - camera.position.x) * 0.03; // Adjusted sensitivity
+        camera.position.y += (mouse.y * 0.8 - camera.position.y) * 0.03;
+        camera.lookAt(scene.position); // Ensure camera always looks at the center
         
         renderer.render(scene, camera);
     }
 
     function onWindowResize() {
-        if (!camera || !renderer) return; // Check if they exist
+        if (!camera || !renderer) return;
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
@@ -230,7 +239,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
     window.addEventListener('resize', onWindowResize, false);
 
-    // Initialize Three.js scene
     initThree();
-
 });
