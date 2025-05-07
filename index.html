@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Victor Ugrinovich - Fullstack Developer</title>
+    <!-- The lang attribute will be updated by JavaScript -->
+    <title data-translate-key="page_title">Victor Ugrinovich - Fullstack Developer</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
@@ -12,87 +13,97 @@
 
     <div class="container">
         <header>
-            <h1>Victor Ugrinovich</h1>
-            <h2>Fullstack Developer</h2>
+            <!-- Language Switcher -->
+            <div id="language-switcher">
+                <button data-lang="en" class="lang-btn active">EN</button>
+                <button data-lang="pt" class="lang-btn">PT</button>
+                <button data-lang="de" class="lang-btn">DE</button>
+                <button data-lang="fr" class="lang-btn">FR</button>
+                <button data-lang="es" class="lang-btn">ES</button>
+            </div>
+
+            <h1 data-translate-key="header_name">Victor Ugrinovich</h1>
+            <h2 data-translate-key="header_role">Fullstack Developer</h2>
             <div class="contact-info">
                 <p><a href="tel:+5534988636999">+55 34 98863-6999</a></p>
                 <p><a href="mailto:victorugri@gmail.com">victorugri@gmail.com</a></p>
-                <p>Location: Brazil / Eligible for EU (Austrian Citizenship - No work visa required)</p>
+                <p data-translate-key="header_location">Location: Brazil / Eligible for EU (Austrian Citizenship - No work visa required)</p>
             </div>
         </header>
 
         <nav id="navbar">
             <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#languages">Languages</a></li>
+                <li><a href="#about" data-translate-key="nav_about">About</a></li>
+                <li><a href="#skills" data-translate-key="nav_skills">Skills</a></li>
+                <li><a href="#experience" data-translate-key="nav_experience">Experience</a></li>
+                <li><a href="#education" data-translate-key="nav_education">Education</a></li>
+                <li><a href="#languages" data-translate-key="nav_languages">Languages</a></li>
             </ul>
         </nav>
 
         <main>
             <section id="about" class="card">
-                <h2><i class="icon">👤</i>About Me</h2>
-                <p>Dynamic and results-oriented Fullstack Developer with a strong foundation in .NET technologies, modern frontend frameworks, and cloud services. Proven ability to contribute to all phases of the software development lifecycle, from concept and design to deployment and maintenance. Passionate about building scalable, efficient, and user-friendly applications. Eager to leverage diverse technical skills and a proactive approach to problem-solving in challenging projects.</p>
+                <h2><i class="icon">👤</i><span data-translate-key="about_title">About Me</span></h2>
+                <p data-translate-key="about_text">Dynamic and results-oriented Fullstack Developer with a strong foundation in .NET technologies, modern frontend frameworks, and cloud services. Proven ability to contribute to all phases of the software development lifecycle, from concept and design to deployment and maintenance. Passionate about building scalable, efficient, and user-friendly applications. Eager to leverage diverse technical skills and a proactive approach to problem-solving in challenging projects.</p>
             </section>
 
             <section id="skills" class="card">
-                <h2><i class="icon">🛠️</i>Skills</h2>
+                <h2><i class="icon">🛠️</i><span data-translate-key="skills_title">Skills</span></h2>
                 <div class="skills-category">
-                    <h3>Backend Development</h3>
+                    <h3 data-translate-key="skills_backend_title">Backend Development</h3>
                     <div class="skill-tags">
                         <span>.NET</span><span>C#</span><span>Python</span><span>SQL Server</span><span>PetaPoco</span><span>API Rest</span><span>JWT</span><span>ElasticSearch</span><span>DynamoDB</span><span>Unit Tests</span>
                     </div>
                 </div>
                 <div class="skills-category">
-                    <h3>Frontend Development</h3>
+                    <h3 data-translate-key="skills_frontend_title">Frontend Development</h3>
                     <div class="skill-tags">
                         <span>HTML</span><span>CSS</span><span>JavaScript</span><span>TypeScript</span><span>jQuery</span><span>Angular</span><span>Ionic</span><span>Flutter</span>
                     </div>
                 </div>
                 <div class="skills-category">
-                    <h3>Miscellaneous</h3>
+                    <h3 data-translate-key="skills_misc_title">Miscellaneous</h3>
                     <div class="skill-tags">
-                        <span>Azure DevOps</span><span>AWS</span><span>Docker</span><span>Matlab</span><span>SolidWorks</span><span>Microsoft Office</span><span>Scrum</span><span>Agile Methodology</span><span>Self-management</span><span>Autonomy</span>
+                        <span>Azure DevOps</span><span>AWS</span><span>Docker</span><span>Matlab</span><span>SolidWorks</span><span data-translate-key="skills_msoffice">Microsoft Office</span><span data-translate-key="skills_scrum">Scrum</span><span data-translate-key="skills_agile">Agile Methodology</span><span data-translate-key="skills_selfmanage">Self-management</span><span data-translate-key="skills_autonomy">Autonomy</span>
                     </div>
                 </div>
             </section>
 
             <section id="experience" class="card">
-                <h2><i class="icon">💼</i>Experience</h2>
+                <h2><i class="icon">💼</i><span data-translate-key="experience_title">Experience</span></h2>
                 <div class="experience-item">
                     <h3>Tecnologia Unica / Bravium</h3>
-                    <p class="tech-stack"><em>Technologies: .NET, C#, HTML, JavaScript, SQL Server</em></p>
+                    <p class="tech-stack"><em data-translate-key="experience_tech_stack_note">Technologies: .NET, C#, HTML, JavaScript, SQL Server</em></p>
 
                     <div class="role">
-                        <h4>Mid-Level Fullstack Developer</h4>
-                        <p class="date">Jan 2023 - Today</p>
-                        <!-- Combined responsibilities, as they likely carried over and expanded -->
+                        <h4 data-translate-key="experience_role_midlevel">Mid-Level Fullstack Developer</h4>
+                        <p class="date" data-translate-key="experience_date_midlevel_present">Jan 2023 - Today</p>
                     </div>
                     <div class="role">
-                        <h4>Junior Fullstack Developer</h4>
-                        <p class="date">July 2020 - Dec 2022</p>
+                        <h4 data-translate-key="experience_role_junior">Junior Fullstack Developer</h4>
+                        <p class="date" data-translate-key="experience_date_junior">July 2020 - Dec 2022</p>
                     </div>
                      <div class="role">
-                        <h4>Intern Fullstack Developer</h4>
-                        <p class="date">Jan 2020 - July 2020</p>
+                        <h4 data-translate-key="experience_role_intern">Intern Fullstack Developer</h4>
+                        <p class="date" data-translate-key="experience_date_intern">Jan 2020 - July 2020</p>
                     </div>
 
-                    <h4>Key Projects & Responsibilities:</h4>
+                    <h4 data-translate-key="experience_key_projects_title">Key Projects & Responsibilities:</h4>
                     <ul>
-                        <li><strong>E-commerce Loyalty Development – Orbia (Bayer's loyalty program):</strong>
+                        <li>
+                            <strong data-translate-key="experience_project_orbia_title">E-commerce Loyalty Development – Orbia (Bayer's loyalty program):</strong>
                             <ul>
-                                <li>Developed .NET API integrating SQL Server to send daily loyalty program data to Bayer via scheduled server jobs.</li>
-                                <li>Improved user registration and user data management on the Orbia Brazil website.</li>
-                                <li>Contributed to Orbia Mexico, Colombia, and Argentina's .NET-based e-commerce platforms and mobile web & app (Angular/Ionic), consuming data via .NET API; refactored login & product pages, optimized backend queries, and supported new feature implementations.</li>
-                                <li>Built a QR Code reading app (Ionic/Angular) for Orbia Mexico's trade fairs, integrating real-time user registration & point tracking.</li>
+                                <li data-translate-key="experience_project_orbia_item1">Developed .NET API integrating SQL Server to send daily loyalty program data to Bayer via scheduled server jobs.</li>
+                                <li data-translate-key="experience_project_orbia_item2">Improved user registration and user data management on the Orbia Brazil website.</li>
+                                <li data-translate-key="experience_project_orbia_item3">Contributed to Orbia Mexico, Colombia, and Argentina's .NET-based e-commerce platforms and mobile web & app (Angular/Ionic), consuming data via .NET API; refactored login & product pages, optimized backend queries, and supported new feature implementations.</li>
+                                <li data-translate-key="experience_project_orbia_item4">Built a QR Code reading app (Ionic/Angular) for Orbia Mexico's trade fairs, integrating real-time user registration & point tracking.</li>
                             </ul>
                         </li>
-                        <li><strong>E-commerce Loyalty Development – Bravium LATAM:</strong>
+                        <li>
+                            <strong data-translate-key="experience_project_bravium_title">E-commerce Loyalty Development – Bravium LATAM:</strong>
                             <ul>
-                                <li>Helped build and maintain loyalty platforms websites (Desktop & Mobile) from scratch for Didi Food Mexico, Swiss Just, and ITAU Uruguay using .NET.</li>
-                                <li>Implemented microservices-based scoring system for user challenges, replacing direct DB queries.</li>
+                                <li data-translate-key="experience_project_bravium_item1">Helped build and maintain loyalty platforms websites (Desktop & Mobile) from scratch for Didi Food Mexico, Swiss Just, and ITAU Uruguay using .NET.</li>
+                                <li data-translate-key="experience_project_bravium_item2">Implemented microservices-based scoring system for user challenges, replacing direct DB queries.</li>
                             </ul>
                         </li>
                     </ul>
@@ -100,35 +111,36 @@
             </section>
 
             <section id="education" class="card">
-                <h2><i class="icon">🎓</i>Education</h2>
+                <h2><i class="icon">🎓</i><span data-translate-key="education_title">Education</span></h2>
                 <div class="education-item">
-                    <h3>Federal University Of Uberlandia</h3>
-                    <p>BA in Mechatronics Engineering - 2020</p>
+                    <h3 data-translate-key="education_uni_name">Federal University Of Uberlandia</h3>
+                    <p><span data-translate-key="education_uni_degree">BA in Mechatronics Engineering</span> - 2020</p>
                 </div>
                 <div class="education-item">
-                    <h3>Microsoft Certified</h3>
-                    <p>Azure Fundamentals (AZ-900)</p>
+                    <h3 data-translate-key="education_cert_name">Microsoft Certified</h3>
+                    <p data-translate-key="education_cert_desc">Azure Fundamentals (AZ-900)</p>
                 </div>
             </section>
 
             <section id="languages" class="card">
-                <h2><i class="icon">🌐</i>Languages</h2>
+                <h2><i class="icon">🌐</i><span data-translate-key="languages_title">Languages</span></h2>
                 <ul>
-                    <li><strong>Portuguese:</strong> Native</li>
-                    <li><strong>English:</strong> Fluent</li>
-                    <li><strong>Spanish:</strong> Fluent</li>
-                    <li><strong>French:</strong> Advanced</li>
-                    <li><strong>German:</strong> Intermediate</li>
+                    <li><strong data-translate-key="lang_portuguese">Portuguese:</strong> <span data-translate-key="lang_native">Native</span></li>
+                    <li><strong data-translate-key="lang_english">English:</strong> <span data-translate-key="lang_fluent">Fluent</span></li>
+                    <li><strong data-translate-key="lang_spanish">Spanish:</strong> <span data-translate-key="lang_fluent">Fluent</span></li>
+                    <li><strong data-translate-key="lang_french">French:</strong> <span data-translate-key="lang_advanced">Advanced</span></li>
+                    <li><strong data-translate-key="lang_german">German:</strong> <span data-translate-key="lang_intermediate">Intermediate</span></li>
                 </ul>
             </section>
         </main>
 
         <footer>
-            <p>&copy; <span id="currentYear"></span> Victor Ugrinovich. All rights reserved.</p>
+            <p>© <span id="currentYear"></span> Victor Ugrinovich. <span data-translate-key="footer_rights">All rights reserved.</span></p>
         </footer>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Translation data will be in script.js for simplicity, or could be a separate translations.js -->
     <script src="script.js"></script>
 </body>
 </html>

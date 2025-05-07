@@ -311,3 +311,62 @@ footer {
         padding: 20px;
     }
 }
+
+#language-switcher {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10; /* Ensure it's above header content if overlapping */
+}
+
+.lang-btn {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--primary-color);
+    padding: 5px 10px;
+    margin-left: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.lang-btn:hover {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+.lang-btn.active {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    font-weight: bold;
+}
+
+/* Responsive adjustment for language switcher if needed */
+@media (max-width: 768px) {
+    #language-switcher {
+        top: 10px;
+        right: 10px;
+    }
+    .lang-btn {
+        padding: 4px 8px;
+        font-size: 0.8em;
+    }
+    /* Adjust header padding if switcher makes it too crowded */
+    header {
+        padding-top: 50px; /* Make space for switcher */
+    }
+}
+
+@media (max-width: 480px) {
+    #language-switcher {
+        position: relative; /* Stack in flow on very small screens */
+        top: auto;
+        right: auto;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+     header {
+        padding-top: 20px; /* Reset if switcher is in flow */
+    }
+}
