@@ -97,20 +97,18 @@ document.addEventListener('DOMContentLoaded', function() {
     
     setLanguage(currentLang);
 
-    // --- Active Nav Link on Scroll/Click (Optional Enhancement) ---
     const navLinks = document.querySelectorAll('#navbar a');
     const sections = document.querySelectorAll('main section');
 
     function changeNavOnScroll() {
         let index = sections.length;
-        while(--index && window.scrollY + 100 < sections[index].offsetTop) {} // 100 is an offset
+        while(--index && window.scrollY + 100 < sections[index].offsetTop) {}
         
         navLinks.forEach((link) => link.classList.remove('active-link'));
-        if (navLinks[index]) { // Check if navLinks[index] exists
+        if (navLinks[index]) {
             navLinks[index].classList.add('active-link');
         }
     }
-    // Call on load and on scroll
     changeNavOnScroll();
     window.addEventListener('scroll', changeNavOnScroll);
 
@@ -121,41 +119,38 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-
-    // --- THREE.JS SCENE ---
+    // --- THREE.JS SCENE (Variables moved to this scope) ---
     const canvas = document.getElementById('bg-canvas');
+    let scene, camera, renderer, shapes = [], materials = [], pointLight; // Moved materials and pointLight here
+    const mouse = new THREE.Vector2();
+
     if (!canvas) {
         console.error("Canvas element not found for Three.js");
     }
-
-    let scene, camera, renderer, shapes = [];
-    const mouse = new THREE.Vector2(); // For mouse interaction
 
     function initThree() {
         if (!canvas) return;
 
         scene = new THREE.Scene();
-        
         camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.z = 6; // Adjusted camera position
+        camera.position.z = 6;
 
         renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setClearColor(0x000000, 0); 
 
-        // Lighting
-        const ambientLight = new THREE.AmbientLight(0x406080, 0.8); // Softer, bluish ambient light
+        const ambientLight = new THREE.AmbientLight(0x406080, 0.8);
         scene.add(ambientLight);
         
-        const primaryColorCSS = getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim() || '#00bfff';
-        const pointLight = new THREE.PointLight(new THREE.Color(primaryColorCSS), 1.2, 150, 1.5); // color, intensity, distance, decay
-        pointLight.position.set(3, 4, 7); // Adjusted position
+        // pointLight is now a global (scoped to DOMContentLoaded)
+        const initialPrimaryColorCSS = getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim() || '#00bfff';
+        pointLight = new THREE.PointLight(new THREE.Color(initialPrimaryColorCSS), 1.2, 150, 1.5);
+        pointLight.position.set(3, 4, 7);
         scene.add(pointLight);
 
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.4); // Softer directional light
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.4);
         directionalLight.position.set(-5, -3, 4);
         scene.add(directionalLight);
-
 
         const geometries = [
             new THREE.TorusKnotGeometry(0.7, 0.2, 120, 16), 
@@ -165,40 +160,37 @@ document.addEventListener('DOMContentLoaded', function() {
             new THREE.TorusGeometry(0.5, 0.15, 16, 100)
         ];
         
-        const primaryColorTHREE = new THREE.Color(primaryColorCSS);
-        const accentColorTHREE1 = new THREE.Color(0xcccccc); // Light grey/silver
-        const accentColorTHREE2 = new THREE.Color(0xffffff); // White
+        const initialPrimaryColorTHREE = new THREE.Color(initialPrimaryColorCSS);
+        const accentColorTHREE1 = new THREE.Color(0xcccccc); 
+        const accentColorTHREE2 = new THREE.Color(0xffffff);
 
-        const materials = [
-            new THREE.MeshStandardMaterial({ color: primaryColorTHREE, metalness: 0.7, roughness: 0.25, transparent: true, opacity: 0.75 }),
-            new THREE.MeshStandardMaterial({ color: accentColorTHREE1, metalness: 0.85, roughness: 0.15, transparent: true, opacity: 0.8 }),
-            new THREE.MeshStandardMaterial({ color: primaryColorTHREE.clone().offsetHSL(0, 0.05, 0.05), metalness: 0.6, roughness: 0.3, transparent: true, opacity: 0.7 }),
-            new THREE.MeshStandardMaterial({ color: accentColorTHREE2, metalness: 0.3, roughness: 0.6, transparent: true, opacity: 0.65 })
+        // materials array is now global (scoped to DOMContentLoaded)
+        materials = [
+            new THREE.MeshStandardMaterial({ name: "primaryMat1", color: initialPrimaryColorTHREE, metalness: 0.7, roughness: 0.25, transparent: true, opacity: 0.75 }),
+            new THREE.MeshStandardMaterial({ name: "accentMat1", color: accentColorTHREE1, metalness: 0.85, roughness: 0.15, transparent: true, opacity: 0.8 }),
+            new THREE.MeshStandardMaterial({ name: "primaryMat2", color: initialPrimaryColorTHREE.clone().offsetHSL(0, 0.05, 0.05), metalness: 0.6, roughness: 0.3, transparent: true, opacity: 0.7 }),
+            new THREE.MeshStandardMaterial({ name: "accentMat2", color: accentColorTHREE2, metalness: 0.3, roughness: 0.6, transparent: true, opacity: 0.65 })
         ];
 
-        const numShapes = 25; // Increased number of shapes
-
+        const numShapes = 25;
         for (let i = 0; i < numShapes; i++) {
             const geom = geometries[Math.floor(Math.random() * geometries.length)];
             const materialForShape = materials[i % materials.length];
             const shape = new THREE.Mesh(geom, materialForShape);
             
-            shape.position.x = (Math.random() - 0.5) * 12; // Wider spread
+            shape.position.x = (Math.random() - 0.5) * 12;
             shape.position.y = (Math.random() - 0.5) * 10;
-            shape.position.z = (Math.random() - 0.5) * 10 - 2; // Spread in depth, mostly in front
+            shape.position.z = (Math.random() - 0.5) * 10 - 2; 
             
             shape.rotation.x = Math.random() * 2 * Math.PI;
             shape.rotation.y = Math.random() * 2 * Math.PI;
             
-            // Store original Z for parallax effect (optional, not used here yet but good for future)
-            // shape.originalZ = shape.position.z;
-
             shapes.push(shape);
             scene.add(shape);
         }
         
         document.addEventListener('mousemove', onDocumentMouseMove, false);
-        animate();
+        animateThree(); // Renamed from animate to avoid conflict
     }
 
     function onDocumentMouseMove(event) {
@@ -206,26 +198,22 @@ document.addEventListener('DOMContentLoaded', function() {
         mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
     }
 
-    function animate() {
+    function animateThree() { // Renamed from animate
         if (!renderer) return;
-        requestAnimationFrame(animate);
+        requestAnimationFrame(animateThree);
 
-        const time = Date.now() * 0.00005; // Slower base time for animations
-
+        const time = Date.now() * 0.00005; 
         shapes.forEach((shape, index) => {
-            shape.rotation.x += (0.0005 + (index % 5) * 0.00008); // Slower, varied rotation
+            shape.rotation.x += (0.0005 + (index % 5) * 0.00008); 
             shape.rotation.y += (0.0008 + (index % 5) * 0.00008);
             shape.rotation.z += (0.0003 + (index % 5) * 0.00005);
-            
-            // Smoother, larger period oscillation
             shape.position.y += Math.sin(time * 50 + index * 0.5) * 0.0018;
             shape.position.x += Math.cos(time * 30 + index * 0.3) * 0.0012;
         });
         
-        // Smooth camera movement towards mouse position for parallax
-        camera.position.x += (mouse.x * 0.8 - camera.position.x) * 0.03; // Adjusted sensitivity
+        camera.position.x += (mouse.x * 0.8 - camera.position.x) * 0.03; 
         camera.position.y += (mouse.y * 0.8 - camera.position.y) * 0.03;
-        camera.lookAt(scene.position); // Ensure camera always looks at the center
+        camera.lookAt(scene.position); 
         
         renderer.render(scene, camera);
     }
@@ -238,6 +226,133 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     window.addEventListener('resize', onWindowResize, false);
-
     initThree();
+
+
+    // --- DYNAMIC COLOR CHANGE LOGIC ---
+    const colorPalette = [
+        { hex: '#00bfff', name: 'DeepSkyBlue' },    // Current blue
+        { hex: '#48D1CC', name: 'MediumTurquoise' }, // Tealish
+        { hex: '#8A2BE2', name: 'BlueViolet' },      // Purple
+        { hex: '#FF7F50', name: 'Coral' },           // Warm orange/pink
+        { hex: '#6495ED', name: 'CornflowerBlue' },  // Softer Blue
+        { hex: '#DB7093', name: 'PaleVioletRed' }    // Magenta/Pinkish
+    ];
+
+    let currentPaletteIndex = 0;
+    let nextPaletteIndex = 1;
+    let transitionProgress = 0; // 0.0 to 1.0
+    const transitionDuration = 5000; // 5 seconds to transition
+    const holdDuration = 15000;    // 15 seconds holding one color
+    let lastTimeUpdate = Date.now();
+    let currentPhase = 'holding'; // 'holding' or 'transitioning'
+
+    function hexToRgb(hex) {
+        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+        } : null;
+    }
+
+    function lerp(start, end, amount) {
+        return start + amount * (end - start);
+    }
+
+    function lerpColor(colorA_rgb, colorB_rgb, amount) {
+        const r = lerp(colorA_rgb.r, colorB_rgb.r, amount);
+        const g = lerp(colorA_rgb.g, colorB_rgb.g, amount);
+        const b = lerp(colorA_rgb.b, colorB_rgb.b, amount);
+        return { r: Math.round(r), g: Math.round(g), b: Math.round(b) };
+    }
+
+    function updateGlobalPrimaryColor(r, g, b) {
+        const newHexColor = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
+
+        document.documentElement.style.setProperty('--primary-color', newHexColor);
+        document.documentElement.style.setProperty('--primary-color-rgb', `${r}, ${g}, ${b}`);
+
+        // Update Three.js elements if they exist
+        if (scene && pointLight && materials && materials.length > 0) {
+            const threeColor = new THREE.Color(r / 255, g / 255, b / 255);
+            
+            if (pointLight) {
+                pointLight.color.set(threeColor);
+            }
+
+            // Update materials that should reflect the primary color
+            materials.forEach(mat => {
+                if (mat.name === "primaryMat1") {
+                    mat.color.set(threeColor);
+                } else if (mat.name === "primaryMat2") {
+                    mat.color.set(threeColor.clone().offsetHSL(0, 0.05, 0.05));
+                }
+            });
+        }
+    }
+    
+    function animateColorCycle() {
+        const now = Date.now();
+        const deltaTime = now - lastTimeUpdate;
+        lastTimeUpdate = now;
+
+        if (currentPhase === 'holding') {
+            transitionProgress += deltaTime;
+            if (transitionProgress >= holdDuration) {
+                currentPhase = 'transitioning';
+                transitionProgress = 0; // Reset for transition
+                currentPaletteIndex = nextPaletteIndex;
+                nextPaletteIndex = (currentPaletteIndex + 1) % colorPalette.length;
+            }
+        } else if (currentPhase === 'transitioning') {
+            transitionProgress += deltaTime;
+            let progressRatio = Math.min(transitionProgress / transitionDuration, 1.0);
+
+            const startColorRgb = hexToRgb(colorPalette[currentPaletteIndex].hex);
+            const endColorRgb = hexToRgb(colorPalette[nextPaletteIndex].hex);
+
+            if (startColorRgb && endColorRgb) {
+                const interpolatedRgb = lerpColor(startColorRgb, endColorRgb, progressRatio);
+                updateGlobalPrimaryColor(interpolatedRgb.r, interpolatedRgb.g, interpolatedRgb.b);
+            }
+
+            if (progressRatio >= 1.0) {
+                currentPhase = 'holding';
+                transitionProgress = 0; // Reset for hold
+                // Ensure final color of transition is set precisely
+                const finalColorRgb = hexToRgb(colorPalette[nextPaletteIndex].hex);
+                 if (finalColorRgb) {
+                    updateGlobalPrimaryColor(finalColorRgb.r, finalColorRgb.g, finalColorRgb.b);
+                }
+            }
+        }
+        requestAnimationFrame(animateColorCycle);
+    }
+
+    // Set initial color based on CSS (should already be done by initThree for 3D elements)
+    // and then start the animation cycle.
+    const initialColorCSS = getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim();
+    const initialRgb = hexToRgb(initialColorCSS);
+    if (initialRgb) {
+        // Find this color in palette or set it as current
+        const foundIndex = colorPalette.findIndex(c => c.hex.toLowerCase() === initialColorCSS.toLowerCase());
+        if (foundIndex !== -1) {
+            currentPaletteIndex = foundIndex;
+            nextPaletteIndex = (currentPaletteIndex + 1) % colorPalette.length;
+        } else {
+            // If initial CSS color is not in palette, add it or just start from palette[0]
+            // For simplicity, we'll assume the CSS starts with the first palette color or is overridden.
+            currentPaletteIndex = 0; // Default to first if not found
+            nextPaletteIndex = 1;
+            const firstColorRgb = hexToRgb(colorPalette[0].hex);
+            if (firstColorRgb) updateGlobalPrimaryColor(firstColorRgb.r, firstColorRgb.g, firstColorRgb.b);
+        }
+    }
+
+
+    if (canvas) { // Only start color animation if canvas (and thus Three.js) is likely active
+        requestAnimationFrame(animateColorCycle);
+    }
+
 });
