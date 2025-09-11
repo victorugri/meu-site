@@ -1,14 +1,20 @@
 :root {
-    --primary-color: #00bfff; /* Deep Sky Blue - vibrante e elegante */
-    --primary-color-rgb: 0, 191, 255;
-    --secondary-color: #07101f; /* Azul bem escuro, quase preto, para profundidade */
-    --text-color: #c8d6e5;     /* Cinza azulado claro, suave para leitura */
-    --card-bg: rgba(12, 28, 50, 0.85); /* Azul escuro semi-transparente para cards */
-    --card-bg-opaque: #0a192f; /* Para navbar e outros elementos que precisam ser opacos */
-    --border-color: rgba(var(--primary-color-rgb), 0.25); /* Borda sutil com a cor primária */
-    --hover-color: #33cfff; /* Um pouco mais claro para hover */
-    --font-body: 'Roboto', sans-serif;
-    --font-heading: 'Orbitron', sans-serif; /* Mantido para o toque "tech" */
+    /* Paleta de Cores - Minimalista e Profissional */
+    --primary-color: #005A9C; /* Um azul corporativo, forte e sóbrio */
+    --primary-color-rgb: 0, 90, 156;
+    --bg-color: #f8f9fa;      /* Fundo off-white, suave para os olhos */
+    --surface-color: #ffffff; /* Cor das superfícies, como cards */
+    --text-color: #212529;      /* Texto principal, quase preto para alto contraste */
+    --text-color-secondary: #6c757d; /* Texto secundário, cinza */
+    --border-color: #dee2e6;    
+
+    /* Fontes */
+    --font-body: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    --font-heading: 'Orbitron', sans-serif; 
+
+    /* UI */
+    --border-radius: 8px;
+    --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 * {
@@ -19,64 +25,54 @@
 
 html {
     scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body {
     font-family: var(--font-body);
-    background-color: var(--secondary-color);
+    background-color: var(--bg-color);
     color: var(--text-color);
-    line-height: 1.7; /* Ligeiramente aumentado para melhor legibilidade */
+    line-height: 1.7;
     overflow-x: hidden;
 }
 
-#bg-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-}
-
 .container {
-    max-width: 900px;
+    max-width: 850px;
     margin: 0 auto;
-    padding: 30px 20px; /* Aumentado padding vertical */
+    padding: 60px 20px;
     position: relative;
     z-index: 1;
 }
 
 header {
     text-align: center;
-    margin-bottom: 50px; /* Aumentado margem */
-    padding: 30px 20px; /* Aumentado padding */
-    background: rgba(10, 25, 47, 0.75); /* Fundo semi-transparente mais sutil */
-    border-radius: 12px; /* Bordas mais arredondadas */
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35); /* Sombra mais suave */
+    margin-bottom: 80px;
 }
 
 header h1 {
     font-family: var(--font-heading);
-    font-size: 3em; /* Ligeiramente maior */
-    color: var(--primary-color);
+    font-size: 2.8em;
+    color: var(--text-color);
     margin-bottom: 8px;
-    letter-spacing: 1.5px; /* Aumentado espaçamento */
-    font-weight: 500;
+    letter-spacing: 1px;
+    font-weight: 700;
 }
 
 header h2 {
-    font-size: 1.6em; /* Ligeiramente maior */
-    font-weight: 300;
-    color: var(--text-color);
-    margin-bottom: 20px;
+    font-size: 1.5em;
+    font-weight: 400;
+    color: var(--primary-color);
+    margin-bottom: 25px;
 }
 
 .contact-info p {
-    margin: 6px 0;
-    font-size: 0.95em;
+    margin: 8px 0;
+    font-size: 1em;
+    color: var(--text-color-secondary);
 }
 .contact-info a {
-    color: var(--text-color);
+    color: var(--text-color-secondary);
     text-decoration: none;
     transition: color 0.3s ease;
 }
@@ -85,15 +81,16 @@ header h2 {
 }
 
 #navbar {
-    background-color: var(--card-bg-opaque);
+    background-color: rgba(248, 249, 250, 0.9); /* Fundo corresponde ao body, com leve transparência */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border-color);
     padding: 12px 0;
-    margin-bottom: 40px;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+    margin-bottom: 50px;
     position: sticky;
-    top: 15px; /* Sticky um pouco abaixo do topo */
+    top: 0;
     z-index: 100;
-    transition: top 0.3s ease, background-color 0.3s ease;
+    transition: box-shadow 0.3s ease;
 }
 
 #navbar ul {
@@ -105,141 +102,168 @@ header h2 {
 }
 
 #navbar ul li {
-    margin: 0 18px; /* Aumentado espaçamento */
+    margin: 0 18px;
 }
 
 #navbar ul li a {
-    color: var(--text-color);
+    color: var(--text-color-secondary);
     text-decoration: none;
-    font-weight: bold;
-    padding: 10px 15px;
-    border-radius: 6px;
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-    display: inline-block; /* Para transform funcionar corretamente */
+    font-weight: 600;
+    padding: 8px 0; /* Apenas padding vertical */
+    position: relative;
+    transition: color 0.3s ease;
 }
 
-#navbar ul li a:hover,
-#navbar ul li a.active-link { /* Classe para link ativo (via JS se necessário, ou manual para a seção atual) */
+/* Efeito de sublinhado no hover */
+#navbar ul li a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
     background-color: var(--primary-color);
-    color: var(--secondary-color);
-    transform: translateY(-2px);
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
 }
 
+#navbar ul li a:hover {
+    color: var(--text-color);
+}
+
+#navbar ul li a:hover::after,
+#navbar ul li a.active-link::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+#navbar ul li a.active-link {
+    color: var(--primary-color);
+}
 
 .card {
-    background-color: var(--card-bg);
-    padding: 30px; /* Aumentado padding */
-    margin-bottom: 35px;
-    border-radius: 12px; /* Bordas mais arredondadas */
+    background-color: var(--surface-color);
+    padding: 40px;
+    margin-bottom: 40px;
+    border-radius: var(--border-radius);
     border: 1px solid var(--border-color);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0,0,0,0.1); /* Sombra mais elaborada */
-    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    box-shadow: var(--box-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
-    transform: translateY(-8px); /* Efeito de elevação maior */
-    box-shadow: 0 15px 40px rgba(var(--primary-color-rgb), 0.15), 0 5px 15px rgba(var(--primary-color-rgb),0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
 }
 
 .card h2 {
     font-family: var(--font-heading);
-    color: var(--primary-color);
-    margin-bottom: 25px;
-    font-size: 1.9em;
-    border-bottom: 2px solid var(--primary-color);
-    padding-bottom: 12px;
+    color: var(--text-color);
+    margin-bottom: 30px;
+    font-size: 1.7em;
+    padding-bottom: 15px;
     display: flex;
     align-items: center;
-    font-weight: 500;
+    font-weight: 600;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .card h2 .icon {
-    margin-right: 12px;
-    font-size: 1.1em;
+    margin-right: 15px;
+    color: var(--primary-color);
 }
 
 .skills-category {
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
 .skills-category h3 {
     color: var(--text-color);
-    margin-bottom: 12px;
-    font-size: 1.25em;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    font-weight: 600;
 }
 
+/* Tags de skills com estilo "outlined" */
 .skill-tags span {
     display: inline-block;
-    background-color: rgba(var(--primary-color-rgb), 0.1); /* Fundo sutil com cor primária */
+    background-color: transparent;
     color: var(--primary-color);
-    padding: 8px 15px;
+    border: 1px solid var(--primary-color);
+    padding: 7px 18px;
     margin: 6px;
     border-radius: 25px;
     font-size: 0.9em;
-    border: 1px solid rgba(var(--primary-color-rgb), 0.3);
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    font-weight: 500;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .skill-tags span:hover {
     background-color: var(--primary-color);
-    color: var(--secondary-color);
-    transform: scale(1.05);
+    color: var(--surface-color);
 }
 
 .experience-item {
-    margin-bottom: 25px;
+    margin-bottom: 30px;
+}
+
+.experience-item:last-child {
+    margin-bottom: 0;
 }
 
 .experience-item h3 {
     color: var(--text-color);
-    font-size: 1.45em;
-    margin-bottom: 6px;
+    font-size: 1.4em;
+    margin-bottom: 5px;
 }
 
 .experience-item .tech-stack {
-    font-style: italic;
-    color: #a0b0c8; /* Tom mais claro */
+    font-style: normal; /* Sem itálico para um look mais limpo */
+    color: var(--text-color-secondary);
     font-size: 0.9em;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
 }
 
 .experience-item .role {
-    margin-bottom: 12px;
-    padding-left: 20px;
-    border-left: 3px solid var(--primary-color);
-    position: relative; /* Para pseudo-elementos se necessário */
+    margin-bottom: 15px;
+    padding-left: 25px;
+    border-left: 2px solid var(--border-color);
 }
 
 .experience-item .role h4 {
     color: var(--text-color);
-    font-size: 1.15em;
-    font-weight: bold;
+    font-size: 1.1em;
+    font-weight: 700;
 }
 
 .experience-item .date {
     font-size: 0.9em;
-    color: #a0b0c8;
-    margin-bottom: 6px;
+    color: var(--text-color-secondary);
+    margin-bottom: 8px;
 }
 
 .experience-item ul {
     list-style-type: none;
     padding-left: 0;
-    margin-top: 12px;
+    margin-top: 15px;
 }
+
 .experience-item ul > li {
-    margin-bottom: 18px;
+    margin-bottom: 20px;
 }
+
 .experience-item ul > li > strong {
-    color: var(--primary-color);
+    color: var(--text-color);
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     font-size: 1.05em;
+    font-weight: 600;
 }
 
 .experience-item ul ul {
     list-style-type: none;
-    padding-left: 25px;
+    padding-left: 15px;
     margin-top: 10px;
 }
 
@@ -247,202 +271,87 @@ header h2 {
     margin-bottom: 10px;
     position: relative;
     padding-left: 25px;
+    color: var(--text-color-secondary);
 }
 
 .experience-item ul ul li::before {
-    content: '▹';
+    content: '–'; /* Traço é mais minimalista que o '▹' */
     position: absolute;
     left: 0;
     color: var(--primary-color);
     font-weight: bold;
-    font-size: 1.2em;
+    font-size: 1.3em;
+    line-height: 1;
 }
 
-
-.education-item {
-    margin-bottom: 18px;
-}
-
-.education-item h3 {
-    color: var(--text-color);
-    font-size: 1.25em;
-}
-
-#languages ul {
-    list-style: none;
-    padding-left: 0;
-}
-
-#languages li {
-    margin-bottom: 10px;
-    font-size: 1.05em;
-}
-
-#languages li strong {
-    color: var(--primary-color);
-    font-weight: 500;
+.education-item, #languages li {
+    padding: 10px 0;
 }
 
 footer {
     text-align: center;
-    padding: 25px;
+    padding: 40px 20px;
     margin-top: 40px;
     font-size: 0.9em;
-    color: #a0b0c8;
+    color: var(--text-color-secondary);
     border-top: 1px solid var(--border-color);
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    header h1 {
-        font-size: 2.4em;
-    }
-    header h2 {
-        font-size: 1.3em;
-    }
-    .card h2 {
-        font-size: 1.6em;
-    }
-    #navbar {
-        top: 10px; /* Navbar mais perto do topo em mobile */
-    }
-    #navbar ul {
-        flex-wrap: wrap; /* Permite que os itens quebrem linha */
-        padding: 0 10px;
-    }
-    #navbar ul li {
-        margin: 5px 10px;
-    }
-    #navbar ul li a {
-        padding: 8px 12px;
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
-        padding: 20px 15px;
-    }
-    header {
-        padding: 20px 15px;
-        margin-bottom: 30px;
-    }
-    header h1 {
-        font-size: 2em;
-    }
-    header h2 {
-        font-size: 1.1em;
-    }
-    .skill-tags span {
-        padding: 6px 12px;
-        font-size: 0.85em;
-    }
-    .card {
-        padding: 20px;
-        border-radius: 10px;
-    }
-    .card h2 {
-        font-size: 1.5em;
-        margin-bottom: 20px;
-        padding-bottom: 10px;
-    }
-     #navbar ul {
-        justify-content: space-around; /* Melhor distribuição em telas pequenas */
-    }
-    #navbar ul li {
-        margin: 5px;
-    }
-    #navbar ul li a {
-        padding: 8px 10px;
-        font-size: 0.9em;
-    }
 }
 
 #language-switcher {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 25px;
+    right: 25px;
     z-index: 10;
 }
 
 .lang-btn {
     background-color: transparent;
-    color: var(--text-color);
-    border: 1px solid var(--primary-color);
+    color: var(--text-color-secondary);
+    border: 1px solid var(--border-color);
     padding: 6px 12px;
-    margin-left: 6px;
+    margin-left: 8px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 6px;
     font-size: 0.9em;
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    font-weight: 500;
+    transition: all 0.3s ease;
 }
 
 .lang-btn:hover {
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
-    transform: translateY(-1px);
+    color: var(--text-color);
+    border-color: var(--text-color);
 }
 
 .lang-btn.active {
     background-color: var(--primary-color);
-    color: var(--secondary-color);
-    font-weight: bold;
+    color: var(--surface-color);
     border-color: var(--primary-color);
+    font-weight: 700;
 }
 
+main > section {
+    scroll-margin-top: 80px; /* Altura da navbar sticky */
+}
+
+/* --- Media Queries --- */
+
 @media (max-width: 768px) {
-    #language-switcher {
-        top: 15px;
-        right: 15px;
-    }
-    .lang-btn {
-        padding: 5px 10px;
-        font-size: 0.85em;
-    }
-    header {
-        padding-top: 60px; /* Espaço para switcher se sobrepor */
-    }
+    .container { padding: 40px 20px; }
+    header h1 { font-size: 2.2em; }
+    header h2 { font-size: 1.2em; }
+    .card h2 { font-size: 1.5em; }
+    #navbar ul { flex-wrap: wrap; justify-content: space-around; }
+    #navbar ul li { margin: 8px 10px; }
 }
 
 @media (max-width: 480px) {
+    .card { padding: 25px; }
+    header {
+      padding-top: 60px; /* Adiciona espaço para o switcher de idioma que será reposicionado */
+      position: relative;
+    }
     #language-switcher {
-        position: relative;
-        top: auto;
-        right: auto;
-        margin-bottom: 20px;
-        text-align: center;
-    }
-     header {
-        padding-top: 20px; /* Reset quando switcher está no fluxo */
-    }
-    .lang-btn {
-        margin: 3px;
-    }
-}
-
-/* Add a class for active nav link (can be set by JS on scroll/click) */
-#navbar a.active-link {
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
-}
-
-/* Adicione estas regras ao seu style.css */
-
-main > section {
-    /* Cria um espaço acima da seção quando ela é o alvo de um link âncora,
-       para evitar que seja obscurecida pela navbar sticky.
-       Valor aproximado: altura da navbar (ex: 60px) + 
-                         offset 'top' da navbar (ex: 15px) + 
-                         um pouco de espaço extra (ex: 10px) */
-    scroll-margin-top: 95px; /* Ajuste este valor conforme necessário para desktop */
-}
-
-@media (max-width: 768px) {
-    main > section {
-        /* Ajuste para mobile se a altura da navbar mudar significativamente 
-           (por exemplo, se ela quebrar em duas linhas).
-           Valor aproximado: altura da navbar mobile (ex: 90px se duas linhas) + 
-                             offset 'top' da navbar mobile (ex: 10px) + 
-                             espaço extra (ex: 10px) */
-        scroll-margin-top: 140px; /* Ajuste este valor conforme necessário para mobile */
+        top: 15px; /* Posição dentro do header */
+        right: 15px;
     }
 }

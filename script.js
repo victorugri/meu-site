@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
         "skills_agile": {"en": "Agile Methodology", "pt": "Metodologia Ágil", "de": "Agile Methodik", "fr": "Méthodologie Agile", "es": "Metodología Ágil"},
         "skills_selfmanage": {"en": "Self-management", "pt": "Autogestão", "de": "Selbstmanagement", "fr": "Autogestion", "es": "Autogestión"},
         "skills_autonomy": {"en": "Autonomy", "pt": "Autonomia", "de": "Autonomie", "fr": "Autonomie", "es": "Autonomía"},
+        "skills_remote": {"en": "Remote Work", "pt": "Trabalho Remoto", "de": "Remote-Arbeit", "fr": "Télétravail", "es": "Trabajo Remoto"},
         "experience_title": {"en": "Experience", "pt": "Experiência", "de": "Erfahrung", "fr": "Expérience", "es": "Experiencia"},
         "experience_tech_stack_note": { "en": "Technologies: .NET, C#, HTML, JavaScript, SQL Server", "pt": "Tecnologias: .NET, C#, HTML, JavaScript, SQL Server", "de": "Technologien: .NET, C#, HTML, JavaScript, SQL Server", "fr": "Technologies: .NET, C#, HTML, JavaScript, SQL Server", "es": "Tecnologías: .NET, C#, HTML, JavaScript, SQL Server" },
         "experience_role_midlevel": {"en": "Mid-Level Fullstack Developer", "pt": "Desenvolvedor Fullstack Pleno", "de": "Mid-Level Fullstack-Entwickler", "fr": "Développeur Fullstack Mid-Level", "es": "Desarrollador Fullstack de Nivel Medio"},
