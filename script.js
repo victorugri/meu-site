@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- TRANSLATION LOGIC ---
     const translations = {
-        "page_title": { "en": "Victor Ugrinovich - Fullstack Developer", "pt": "Victor Ugrinovich - Desenvolvedor Fullstack", "de": "Victor Ugrinovich - Fullstack-Entwickler", "fr": "Victor Ugrinovich - Développeur Fullstack", "es": "Victor Ugrinovich - Desarrollador Fullstack" },
+        "page_title": { "en": "Victor Ugrinovich | Fullstack Developer", "pt": "Victor Ugrinovich | Desenvolvedor Fullstack", "de": "Victor Ugrinovich | Fullstack-Entwickler", "fr": "Victor Ugrinovich | Développeur Fullstack", "es": "Victor Ugrinovich | Desarrollador Fullstack" },
         "header_name": { "en": "Victor Ugrinovich", "pt": "Victor Ugrinovich", "de": "Victor Ugrinovich", "fr": "Victor Ugrinovich", "es": "Victor Ugrinovich" },
         "header_role": { "en": "Fullstack Developer", "pt": "Desenvolvedor Fullstack", "de": "Fullstack-Entwickler", "fr": "Développeur Fullstack", "es": "Desarrollador Fullstack" },
         "header_location": { "en": "Location: Brazil / Eligible for EU (Austrian Citizenship - No work visa required)", "pt": "Localização: Brasil / Elegível para UE (Cidadania Austríaca - Visto de trabalho não necessário)", "de": "Standort: Brasilien / EU-berechtigt (Österreichische Staatsbürgerschaft - Kein Arbeitsvisum erforderlich)", "fr": "Lieu: Brésil / Éligible pour l'UE (Citoyenneté autrichienne - Aucun visa de travail requis)", "es": "Ubicación: Brasil / Elegible para UE (Ciudadanía austríaca - No se requiere visa de trabajo)" },
