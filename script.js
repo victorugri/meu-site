@@ -103,7 +103,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function changeNavOnScroll() {
         let index = sections.length;
-        while(--index && window.scrollY + 100 < sections[index].offsetTop) {}
+        // Fix for the last short section: detect if scrolled to very bottom
+        if ((window.innerHeight + Math.round(window.scrollY)) >= document.body.offsetHeight - 10) {
+            index = sections.length - 1;
+        } else {
+            while(--index && window.scrollY + 100 < sections[index].offsetTop) {}
+        }
         
         navLinks.forEach((link) => link.classList.remove('active-link'));
         if (navLinks[index]) {
@@ -120,240 +125,44 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // --- THREE.JS SCENE (Variables moved to this scope) ---
-    const canvas = document.getElementById('bg-canvas');
-    let scene, camera, renderer, shapes = [], materials = [], pointLight; // Moved materials and pointLight here
-    const mouse = new THREE.Vector2();
-
-    if (!canvas) {
-        console.error("Canvas element not found for Three.js");
+    // --- THEME TOGGLE LOGIC ---
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    // Note: lucide creates <svg> classes mirroring the old <i> classes. We wait for svgs to exist.
+    
+    let currentTheme = localStorage.getItem('theme');
+    if (!currentTheme) {
+        currentTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
-
-    function initThree() {
-        if (!canvas) return;
-
-        scene = new THREE.Scene();
-        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.z = 6;
-
-        renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setClearColor(0x000000, 0); 
-
-        const ambientLight = new THREE.AmbientLight(0x406080, 0.8);
-        scene.add(ambientLight);
+    
+    function applyTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
         
-        // pointLight is now a global (scoped to DOMContentLoaded)
-        const initialPrimaryColorCSS = getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim() || '#00bfff';
-        pointLight = new THREE.PointLight(new THREE.Color(initialPrimaryColorCSS), 1.2, 150, 1.5);
-        pointLight.position.set(3, 4, 7);
-        scene.add(pointLight);
-
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.4);
-        directionalLight.position.set(-5, -3, 4);
-        scene.add(directionalLight);
-
-        const geometries = [
-            new THREE.TorusKnotGeometry(0.7, 0.2, 120, 16), 
-            new THREE.SphereGeometry(0.35, 32, 32),
-            new THREE.BoxGeometry(0.6, 0.6, 0.6),
-            new THREE.OctahedronGeometry(0.45),
-            new THREE.TorusGeometry(0.5, 0.15, 16, 100)
-        ];
+        // After lucide.createIcons(), the elements are SVGs
+        const moonIcon = document.querySelector('.moon-icon');
+        const sunIcon = document.querySelector('.sun-icon');
         
-        const initialPrimaryColorTHREE = new THREE.Color(initialPrimaryColorCSS);
-        const accentColorTHREE1 = new THREE.Color(0xcccccc); 
-        const accentColorTHREE2 = new THREE.Color(0xffffff);
-
-        // materials array is now global (scoped to DOMContentLoaded)
-        materials = [
-            new THREE.MeshStandardMaterial({ name: "primaryMat1", color: initialPrimaryColorTHREE, metalness: 0.7, roughness: 0.25, transparent: true, opacity: 0.75 }),
-            new THREE.MeshStandardMaterial({ name: "accentMat1", color: accentColorTHREE1, metalness: 0.85, roughness: 0.15, transparent: true, opacity: 0.8 }),
-            new THREE.MeshStandardMaterial({ name: "primaryMat2", color: initialPrimaryColorTHREE.clone().offsetHSL(0, 0.05, 0.05), metalness: 0.6, roughness: 0.3, transparent: true, opacity: 0.7 }),
-            new THREE.MeshStandardMaterial({ name: "accentMat2", color: accentColorTHREE2, metalness: 0.3, roughness: 0.6, transparent: true, opacity: 0.65 })
-        ];
-
-        const numShapes = 25;
-        for (let i = 0; i < numShapes; i++) {
-            const geom = geometries[Math.floor(Math.random() * geometries.length)];
-            const materialForShape = materials[i % materials.length];
-            const shape = new THREE.Mesh(geom, materialForShape);
-            
-            shape.position.x = (Math.random() - 0.5) * 12;
-            shape.position.y = (Math.random() - 0.5) * 10;
-            shape.position.z = (Math.random() - 0.5) * 10 - 2; 
-            
-            shape.rotation.x = Math.random() * 2 * Math.PI;
-            shape.rotation.y = Math.random() * 2 * Math.PI;
-            
-            shapes.push(shape);
-            scene.add(shape);
-        }
-        
-        document.addEventListener('mousemove', onDocumentMouseMove, false);
-        animateThree(); // Renamed from animate to avoid conflict
-    }
-
-    function onDocumentMouseMove(event) {
-        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-    }
-
-    function animateThree() { // Renamed from animate
-        if (!renderer) return;
-        requestAnimationFrame(animateThree);
-
-        const time = Date.now() * 0.00005; 
-        shapes.forEach((shape, index) => {
-            shape.rotation.x += (0.0005 + (index % 5) * 0.00008); 
-            shape.rotation.y += (0.0008 + (index % 5) * 0.00008);
-            shape.rotation.z += (0.0003 + (index % 5) * 0.00005);
-            shape.position.y += Math.sin(time * 50 + index * 0.5) * 0.0018;
-            shape.position.x += Math.cos(time * 30 + index * 0.3) * 0.0012;
-        });
-        
-        camera.position.x += (mouse.x * 0.8 - camera.position.x) * 0.03; 
-        camera.position.y += (mouse.y * 0.8 - camera.position.y) * 0.03;
-        camera.lookAt(scene.position); 
-        
-        renderer.render(scene, camera);
-    }
-
-    function onWindowResize() {
-        if (!camera || !renderer) return;
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-    }
-
-    window.addEventListener('resize', onWindowResize, false);
-    initThree();
-
-
-    // --- DYNAMIC COLOR CHANGE LOGIC ---
-    const colorPalette = [
-        { hex: '#00bfff', name: 'DeepSkyBlue' },    // Current blue
-        { hex: '#48D1CC', name: 'MediumTurquoise' }, // Tealish
-        { hex: '#8A2BE2', name: 'BlueViolet' },      // Purple
-        { hex: '#FF7F50', name: 'Coral' },           // Warm orange/pink
-        { hex: '#6495ED', name: 'CornflowerBlue' },  // Softer Blue
-        { hex: '#DB7093', name: 'PaleVioletRed' }    // Magenta/Pinkish
-    ];
-
-    let currentPaletteIndex = 0;
-    let nextPaletteIndex = 1;
-    let transitionProgress = 0; // 0.0 to 1.0
-    const transitionDuration = 5000; // 5 seconds to transition
-    const holdDuration = 15000;    // 15 seconds holding one color
-    let lastTimeUpdate = Date.now();
-    let currentPhase = 'holding'; // 'holding' or 'transitioning'
-
-    function hexToRgb(hex) {
-        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-        return result ? {
-            r: parseInt(result[1], 16),
-            g: parseInt(result[2], 16),
-            b: parseInt(result[3], 16)
-        } : null;
-    }
-
-    function lerp(start, end, amount) {
-        return start + amount * (end - start);
-    }
-
-    function lerpColor(colorA_rgb, colorB_rgb, amount) {
-        const r = lerp(colorA_rgb.r, colorB_rgb.r, amount);
-        const g = lerp(colorA_rgb.g, colorB_rgb.g, amount);
-        const b = lerp(colorA_rgb.b, colorB_rgb.b, amount);
-        return { r: Math.round(r), g: Math.round(g), b: Math.round(b) };
-    }
-
-    function updateGlobalPrimaryColor(r, g, b) {
-        const newHexColor = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
-
-        document.documentElement.style.setProperty('--primary-color', newHexColor);
-        document.documentElement.style.setProperty('--primary-color-rgb', `${r}, ${g}, ${b}`);
-
-        // Update Three.js elements if they exist
-        if (scene && pointLight && materials && materials.length > 0) {
-            const threeColor = new THREE.Color(r / 255, g / 255, b / 255);
-            
-            if (pointLight) {
-                pointLight.color.set(threeColor);
+        if (moonIcon && sunIcon) {
+            if (theme === 'dark') {
+                moonIcon.style.display = 'none';
+                sunIcon.style.display = 'block';
+            } else {
+                moonIcon.style.display = 'block';
+                sunIcon.style.display = 'none';
             }
-
-            // Update materials that should reflect the primary color
-            materials.forEach(mat => {
-                if (mat.name === "primaryMat1") {
-                    mat.color.set(threeColor);
-                } else if (mat.name === "primaryMat2") {
-                    mat.color.set(threeColor.clone().offsetHSL(0, 0.05, 0.05));
-                }
-            });
         }
     }
     
-    function animateColorCycle() {
-        const now = Date.now();
-        const deltaTime = now - lastTimeUpdate;
-        lastTimeUpdate = now;
-
-        if (currentPhase === 'holding') {
-            transitionProgress += deltaTime;
-            if (transitionProgress >= holdDuration) {
-                currentPhase = 'transitioning';
-                transitionProgress = 0; // Reset for transition
-                currentPaletteIndex = nextPaletteIndex;
-                nextPaletteIndex = (currentPaletteIndex + 1) % colorPalette.length;
-            }
-        } else if (currentPhase === 'transitioning') {
-            transitionProgress += deltaTime;
-            let progressRatio = Math.min(transitionProgress / transitionDuration, 1.0);
-
-            const startColorRgb = hexToRgb(colorPalette[currentPaletteIndex].hex);
-            const endColorRgb = hexToRgb(colorPalette[nextPaletteIndex].hex);
-
-            if (startColorRgb && endColorRgb) {
-                const interpolatedRgb = lerpColor(startColorRgb, endColorRgb, progressRatio);
-                updateGlobalPrimaryColor(interpolatedRgb.r, interpolatedRgb.g, interpolatedRgb.b);
-            }
-
-            if (progressRatio >= 1.0) {
-                currentPhase = 'holding';
-                transitionProgress = 0; // Reset for hold
-                // Ensure final color of transition is set precisely
-                const finalColorRgb = hexToRgb(colorPalette[nextPaletteIndex].hex);
-                 if (finalColorRgb) {
-                    updateGlobalPrimaryColor(finalColorRgb.r, finalColorRgb.g, finalColorRgb.b);
-                }
-            }
-        }
-        requestAnimationFrame(animateColorCycle);
-    }
-
-    // Set initial color based on CSS (should already be done by initThree for 3D elements)
-    // and then start the animation cycle.
-    const initialColorCSS = getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim();
-    const initialRgb = hexToRgb(initialColorCSS);
-    if (initialRgb) {
-        // Find this color in palette or set it as current
-        const foundIndex = colorPalette.findIndex(c => c.hex.toLowerCase() === initialColorCSS.toLowerCase());
-        if (foundIndex !== -1) {
-            currentPaletteIndex = foundIndex;
-            nextPaletteIndex = (currentPaletteIndex + 1) % colorPalette.length;
-        } else {
-            // If initial CSS color is not in palette, add it or just start from palette[0]
-            // For simplicity, we'll assume the CSS starts with the first palette color or is overridden.
-            currentPaletteIndex = 0; // Default to first if not found
-            nextPaletteIndex = 1;
-            const firstColorRgb = hexToRgb(colorPalette[0].hex);
-            if (firstColorRgb) updateGlobalPrimaryColor(firstColorRgb.r, firstColorRgb.g, firstColorRgb.b);
-        }
-    }
-
-
-    if (canvas) { // Only start color animation if canvas (and thus Three.js) is likely active
-        requestAnimationFrame(animateColorCycle);
+    // Defer applying theme slightly to guarantee lucide icons are fully rendered over the DOM tree so we can toggle display
+    setTimeout(() => {
+        applyTheme(currentTheme);
+    }, 10);
+    
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+            const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            applyTheme(newTheme);
+        });
     }
 
 });
